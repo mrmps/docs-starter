@@ -1,0 +1,142 @@
+---
+title: Update Your Mac Mini
+description: How to update macOS on your Mac Mini to keep your OpenClaw agent running on the latest version.
+---
+
+# Update Your Mac Mini
+
+Keeping macOS up to date ensures your OpenClaw agent runs on the most stable, secure version of the operating system. Apple releases updates regularly with performance improvements and security fixes.
+
+<Info>
+  Updates usually take 15–30 minutes. Your agent will be temporarily offline during the restart. We recommend updating during off-hours.
+</Info>
+
+## Check for updates
+
+<Steps>
+  <Step title="Open System Settings">
+    Click the **Apple menu** () in the top-left corner of the screen, then click **System Settings**.
+  </Step>
+
+  <Step title="Go to Software Update">
+    In the sidebar, click **General**, then click **Software Update**.
+
+    Your Mac will check for available updates. This may take a minute.
+  </Step>
+
+  <Step title="Review available updates">
+    If an update is available, you'll see the version number and a description of what's included.
+
+    - **macOS version updates** (e.g., macOS 15.3 → 15.4): These include new features and important fixes. Always install these.
+    - **Security updates**: Critical patches. Install immediately.
+    - **Supplemental updates**: Minor fixes. Install when convenient.
+  </Step>
+
+  <Step title="Install the update">
+    1. Click **Update Now** (or **Upgrade Now** for major versions)
+    2. Agree to the terms if prompted
+    3. Enter your **Mac password** when asked
+    4. Your Mac will download the update and restart automatically
+
+    <Warning>
+      Do not close the lid, unplug power, or shut down the Mac Mini during the update. Let it complete on its own.
+    </Warning>
+  </Step>
+
+  <Step title="Verify the update">
+    After the restart:
+
+    1. Click **Apple menu →  System Settings → General → About**
+    2. Check the **macOS** version number
+    3. Confirm it matches the latest version you just installed
+
+    Your OpenClaw agent should reconnect automatically via Tailscale within a few minutes.
+  </Step>
+</Steps>
+
+## Enable automatic updates
+
+To keep your Mac Mini updated without manual intervention:
+
+<Steps>
+  <Step title="Open System Settings">
+    **Apple menu → System Settings → General → Software Update**
+  </Step>
+
+  <Step title="Turn on automatic updates">
+    Click the **(i)** icon next to **Automatic Updates** and enable:
+
+    - **Check for updates** — On
+    - **Download new updates when available** — On
+    - **Install macOS updates** — On
+    - **Install Security Responses and system files** — On
+  </Step>
+</Steps>
+
+<Note>
+  Even with automatic updates enabled, major macOS upgrades (e.g., macOS 15 → macOS 16) still require manual approval. We'll let you know when it's time to upgrade.
+</Note>
+
+## Updating via Terminal
+
+If you prefer using Terminal or are being guided by our support team:
+
+```bash
+# Check for available updates
+softwareupdate --list
+
+# Install all available updates
+softwareupdate --install --all --agree-to-license
+
+# Install and restart automatically
+softwareupdate --install --all --agree-to-license --restart
+```
+
+<Warning>
+  The `--restart` flag will immediately restart your Mac Mini after installation. Make sure nothing critical is running.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'No updates available' but I know there's a new version">
+    1. Make sure your Mac Mini is connected to the internet
+    2. Try restarting your Mac Mini and checking again
+    3. Go to **System Settings → General → Software Update** and click the refresh icon
+
+    Some updates roll out gradually — if you don't see it today, check again tomorrow.
+  </Accordion>
+
+  <Accordion title="Update is stuck or taking too long">
+    Updates can take up to an hour for major versions. If it's been stuck for more than 2 hours:
+
+    1. **Do not force shut down** unless absolutely necessary
+    2. Wait — the progress bar can be misleading
+    3. If truly stuck, hold the power button for 10 seconds to force restart, then check for updates again
+
+    Contact us if the update fails after a restart.
+  </Accordion>
+
+  <Accordion title="Not enough storage for the update">
+    macOS updates typically need 10–15 GB of free space.
+
+    1. Go to **Apple menu → System Settings → General → Storage**
+    2. Review what's using space
+    3. Empty the Trash
+    4. Remove large files you don't need
+
+    If you're unsure what's safe to delete, contact us first.
+  </Accordion>
+
+  <Accordion title="My agent didn't reconnect after updating">
+    1. Check that Tailscale is running (look for the icon in the menu bar)
+    2. If not, open Tailscale from **Applications**
+    3. Make sure it shows **Connected**
+
+    If Tailscale is connected but your agent isn't responding, contact us at [mike@setupclaw.com](mailto:mike@setupclaw.com).
+  </Accordion>
+</AccordionGroup>
+
+## Need help?
+
+Reach out to us at **mike@setupclaw.com** or message us in Slack. We're happy to walk you through the update process.
